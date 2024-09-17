@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import Image from "next/image";
+import Header from "./components/header";
 
 export default function Home() {
   const [count, setCount] = useState<number>(5);
@@ -18,6 +19,7 @@ export default function Home() {
       <Button onClick={minus}>-</Button>
       <Label className="text-4xl mx-5">{count}</Label>
       <Button onClick={add}>+</Button>
+      <Header />
     </div>
   );
 }
