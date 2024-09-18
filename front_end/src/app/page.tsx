@@ -1,25 +1,16 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
-import Image from "next/image";
-import Header from "./components/header";
+
+import Example from "@/components/ProductList/productList";
 
 export default function Home() {
-  const [count, setCount] = useState<number>(5);
-  const minus = () => {
-    setCount(count - 1);
-  };
-  const add = () => {
-    setCount(count + 1);
-  };
   return (
-    <div className="items-center">
-      <h1>Welcome E-COMERCE app</h1>
-      <Button onClick={minus}>-</Button>
-      <Label className="text-4xl mx-5">{count}</Label>
-      <Button onClick={add}>+</Button>
-      <Header />
+    <div className=" max-w-[1440px]items-center">
+      <img src="./images/home.png" alt="" className="w-[1440px]" />
+      <p>Wildflower Hoodie</p>
+      <p>120'000</p>
+      <div className="">
+        <Example />
+      </div>
     </div>
   );
 }

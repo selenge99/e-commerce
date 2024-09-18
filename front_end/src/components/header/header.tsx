@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { CiSearch } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { FiShoppingCart } from "react-icons/fi";
+import { Input } from "../ui/input";
 
 const Header = () => {
   return (
@@ -13,17 +14,20 @@ const Header = () => {
         <h1>ECOMMERCE</h1>
         <p>Ангилал</p>
       </div>
-      <div className="flex">
+      <div className="flex items-center border rounded-full p-2">
         <CiSearch />
-        <input type="Бүтээгдэхүүн хайх" className="bg-[#18181B] rounded-full" />
+        <Input className=" border-none" placeholder="Бүтээгдэхүүн хайх" />
       </div>
       <div className="flex gap-8 items-center">
         <CiHeart size={24} />
         <FiShoppingCart size={24} />
-        <Button variant={"outline"}>
+        <Button
+          // variant={"outline"}
+          className="w-[101px] px-8 py-2 rounded-full border-[#2563EB] border-[1px]"
+        >
           <Link href="/signup">Бүртгүүлэх</Link>
         </Button>
-        <Button>
+        <Button className="bg-blue-700 rounded-full w-[82px] px-3 py-2">
           <Link href="/login">Нэвтрэх</Link>
         </Button>
       </div>
