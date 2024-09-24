@@ -4,37 +4,48 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React from "react";
 import { useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import { useRouter } from "next/navigation";
-
+import { apiUrl } from "@/utils/util";
 
 const Signup = () => {
-const router = useRouter();
+  const router = useRouter();
 
-const [firstname, setFirstName] = useState("");
-const [email, setEmail] = useState("")
-const [password, setPassword] = useState("");
-const [ repassword, setRepassword] = useState("");
-
-const handleSignup = async () => {
-  console.log("firstname", firstname);
-  console.log("email",email);
-  console.log("Password", password);
-  console.log("Repassword", repassword);
-
-if(password === repassword) {
-  const response = await axios.post(`http://localhost:8000/api/v1/auth/signup`,{
-    firstname:firstname,
-    email:email,
-    password:password,
+  const [newUser, setNewUser] = useState({
+    firstname: "",
+    email: "",
+    password: "",
+    repassword: "",
   });
-  if (response.status === 201 ) {
-    router.push("/login");
-  }
-  } else {
-    alert("Nuuts ug tohirohgui baina")
-  }
-};
+  const { firstname, email, password, repassword } = newUser;
+
+  const handleSignup = async () => {
+    try {
+      console.log("object", firstname, email, password, repassword);
+      if (password === repassword) {
+        const response = await axios.post(`${apiUrl}/api/v1/auth/signup`, {
+          firstname: firstname,
+          email: email,
+          password: password,
+          repassword: repassword,
+        });
+        console.log("response", response);
+        if (response.status === 201) {
+          router.push("/login");
+        }
+      }
+    } catch (error) {
+      console.log("failed");
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNewUser({
+      ...newUser,
+      [name]: value,
+    });
+  };
   return (
     <div className="bg-gray-100 max-w-[1440px]">
       <div className="w-[1040px] h-[800px] p-32 m-auto">
@@ -42,19 +53,26 @@ if(password === repassword) {
           <h1>Бүртгүүлэх</h1>
           <div>
             <div className="flex flex-col gap-4 rounded-2xl mt-6">
-              <Input placeholder="Нэр" onChange={(e)=>{
-                setFirstName(e.target.value)
-              }}/>
-              <Input placeholder="Имэйл хаяг" onChange={(e)=>{
-                setEmail(e.target.value)
-
-              }}/>
-              <Input placeholder="Нууц үг" onChange={(e)=>{  
-                setPassword(e.target.value)
-              }}/>
-              <Input placeholder="Нууц үг давтах " onChange={(e)=>{
-                setRepassword(e.target.value)
-              }}/>
+              <Input
+                placeholder="Нэр"
+                name="firstname"
+                onChange={handleChange}
+              />
+              <Input
+                placeholder="Имэйл хаяг"
+                onChange={handleChange}
+                name="email"
+              />
+              <Input
+                placeholder="Нууц үг"
+                onChange={handleChange}
+                name="password"
+              />
+              <Input
+                placeholder="Нууц үг давтах "
+                onChange={handleChange}
+                name="repassword"
+              />
             </div>
 
             <div>
@@ -68,7 +86,10 @@ if(password === repassword) {
               </div>
             </div>
             <div className="flex flex-col gap-12 mt-4">
-              <Button className="w-[334px] h-[36px] bg-blue-600 rounded-2xl py-[8px] px-[16px] text-white" onClick={handleSignup}>
+              <Button
+                className="w-[334px] h-[36px] bg-blue-600 rounded-2xl py-[8px] px-[16px] text-white"
+                onClick={handleSignup}
+              >
                 Үүсгэх
               </Button>
               <Button className="bg-white text-blue-500 rounded-2xl">
