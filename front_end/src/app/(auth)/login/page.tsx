@@ -29,7 +29,7 @@ const Login = () => {
       if (response.status === 200) {
         const { token } = response.data;
         localStorage.setItem("token", token);
-        router.push("/home");
+        router.push("/");
       }
     } catch (error) {
       console.error("failed");
@@ -38,6 +38,7 @@ const Login = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
     setUser({
       ...user,
       [name]: value,
