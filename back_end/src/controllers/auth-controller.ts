@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import User from "../models/user.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { generateToken } from "../utils/jwt";
 
 export const signup = async (req: Request, res: Response) => {
   try {
@@ -45,9 +46,7 @@ export const login = async (req: Request, res: Response) => {
           .status(404)
           .json({ message: "Hereglegchiin password tohirohgui baina" });
       } else {
-        const token = jwt.sign({ id: user._id }, "USER_TOKEN_PASS@369", {
-          expiresIn: "1h",
-        });
+        const token = generateToken({ id: user._id });
         res.status(200).json({ message: "Sucess", token });
       }
     }

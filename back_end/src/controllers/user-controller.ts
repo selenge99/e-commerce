@@ -6,8 +6,9 @@ export const getAlluser = async (req: Request, res: Response) => {
   res.status(201).json({ message: "All Users data", users: users });
 };
 
-const getCurrentUser = async (req: Request, res: Response) => {
+export const getCurrentUser = async (req: Request, res: Response) => {
   console.log(req);
-  //   const user = await User.findById();
-  //   res.status(201).json({ message: "Current User", user: user });
+  const { id } = req.user;
+  const user = await User.findById(id);
+  res.status(201).json({ message: "Current User", user: user });
 };
