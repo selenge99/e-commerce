@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 const Otp = () => {
   const router = useRouter();
   const [countDown, setCountDown] = useState(30);
-  const [otpValue, setOtpValue] = useState("12");
+  const [otpValue, setOtpValue] = useState("");
 
   useEffect(() => {
     if (countDown > 0) {
@@ -28,7 +28,7 @@ const Otp = () => {
     setCountDown(30);
   };
 
-  const handleConfirmOtp = (value: string) => {
+  const handleConfirmOtp = async (value: string) => {
     setOtpValue(value);
     if (value.length === 4) {
       router.push("/forgetpass/newpass");

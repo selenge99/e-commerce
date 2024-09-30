@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
 
 interface IUser {
   _id: Schema.Types.ObjectId;
@@ -11,6 +11,9 @@ interface IUser {
   role: String;
   profile_image: String;
   address: String;
+  otp: String;
+  passwordResetToken: String;
+  passwordResetTokenExpire: Date;
   created_at: Date;
   updated_at: Date;
 }
@@ -48,6 +51,12 @@ const userSchema = new Schema<IUser>({
   address: {
     type: String,
   },
+  otp: {
+    type: String,
+    default: "",
+  },
+  passwordResetToken: { type: String, default: "" },
+  passwordResetTokenExpire: { type: Date, default: undefined },
   created_at: {
     type: Date,
     default: Date.now,
@@ -57,15 +66,15 @@ const userSchema = new Schema<IUser>({
     default: Date.now,
   },
 });
-userSchema.pre('save', async function(next){
-  if (!this.isModified("password")){
-   next();
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
   } else {
     const hashedPassword = bcrypt.hashSync(this.password.toString(), 10);
     this.password = hashedPassword;
     next();
   }
-})
+});
 
 const User = model("user", userSchema);
 
