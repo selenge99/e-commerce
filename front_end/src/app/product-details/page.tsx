@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 const ProductDetail = () => {
   return (
     <div className="max-w-[1040px] h-[521px] flex justify-between mt-[52px]">
@@ -14,7 +16,7 @@ const ProductDetail = () => {
           className="w-[422px] h-[521px]"
         />
       </div>
-      <div>
+      <div className="flex flex-col justify-between">
         <p className="border rounded-full w-[57px] border-[#2563EB] h-5 flex justify-center items-center">
           шинэ
         </p>
@@ -22,19 +24,19 @@ const ProductDetail = () => {
         {/* icon */}
         <p>Зэрлэг цэцгийн зурагтай даавуун материалтай цамц</p>
         <p>Хэмжээний заавар</p>
-        <div>
-          <button>s</button>
-          <button>m</button>
-          <button>l</button>
-          <button>xl</button>
-          <button>2xl</button>
+        <div className="flex gap-1">
+          <Button className="rounded-full size-8">S</Button>
+          <Button className="rounded-full size-8">M</Button>
+          <Button className="rounded-full size-8">L</Button>
+          <Button className="rounded-full size-8">XL</Button>
+          <Button className="rounded-full size-8">2XL</Button>
         </div>
-        <div>
-          <button>-</button>
+        <div className="flex gap-2 items-center">
+          <Button className="rounded-full size-8">-</Button>
           <p>1</p>
-          <button>+</button>
+          <Button className="rounded-full size-8">+</Button>
         </div>
-        <p>120_000</p>
+        <p>120000</p>
         <button>Сагсанд нэмэх</button>
       </div>
     </div>
