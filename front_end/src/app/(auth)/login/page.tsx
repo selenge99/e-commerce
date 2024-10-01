@@ -36,6 +36,10 @@ const Login = () => {
     }
   };
 
+  const handlePassword = () => {
+    router.push("/forgetPassword/email");
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
@@ -68,7 +72,9 @@ const Login = () => {
             >
               Нэвтрэх
             </Button>
-            <p className="underline m-auto mt-4">Нууц үг мартсан</p>
+            <p className="underline m-auto mt-4" onClick={handlePassword}>
+              Нууц үг мартсан{" "}
+            </p>
             <Button className="bg-white w-[334px] h-[36px] rounded-2xl text-blue-500 mt-12">
               Бүртгүүлэх
             </Button>

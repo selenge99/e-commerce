@@ -33,7 +33,7 @@ export const signup = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
-    console.log("emai", email);
+    console.log("email", email);
     const user = await User.findOne({ email });
     console.log("user", user);
     if (!user) {
@@ -49,11 +49,12 @@ export const login = async (req: Request, res: Response) => {
           .json({ message: "Hereglegchiin password tohirohgui baina" });
       } else {
         const token = generateToken({ id: user._id });
-        res.status(200).json({ message: "Sucess", token });
+        res.status(200).json({ message: "Success", token });
       }
     }
   } catch (error) {
-    console.error(res.status(500).json({ message: "Aldaa" }));
+    res.status(500).json({ message: "Aldaa" });
+    console.log("error", error);
   }
 };
 
@@ -78,6 +79,7 @@ export const forgetPassword = async (req: Request, res: Response) => {
 
 export const verifyOtp = async (req: Request, res: Response) => {
   const { email, otpValue } = req.body;
+  console.log("OTP", otpValue);
   const findUser = await User.findOne({ email: email, otp: otpValue });
   if (!findUser) {
     return res
@@ -96,13 +98,14 @@ export const verifyOtp = async (req: Request, res: Response) => {
 
   await sendEmail(
     email,
-    `<a href="http://localhost3000/forgetPassword/newpass?resettoken="${resetToken}"> Nuuts ug sergeeh holboos</a>`
+    `<a href="http://localhost:3000/forgetPassword/newpass?resettoken=${resetToken}"> Nuuts ug sergeeh holboos</a>`
   );
   res.status(200).json({ message: "nuuts ug sergeeh email ilgeelee" });
 };
 
 export const verifyPassword = async (req: Request, res: Response) => {
   const { password, resetToken } = req.body;
+  console.log(password, resetToken);
 
   const hashedResetToken = crypto
     .createHash("sha256")
@@ -111,7 +114,7 @@ export const verifyPassword = async (req: Request, res: Response) => {
 
   const findUser = await User.findOne({
     passwordResetToken: hashedResetToken,
-    passwordResetTokenExpire: { $gt: Date.now },
+    passwordResetTokenExpire: { $gt: Date.now() },
   });
   if (!findUser) {
     return res

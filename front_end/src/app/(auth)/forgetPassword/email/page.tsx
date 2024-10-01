@@ -55,7 +55,7 @@ const Email = () => {
           "http://localhost:8000/api/v1/auth/verify-otp",
           {
             email,
-            otpValue,
+            otpValue: value,
           }
         );
         if (res.status === 200) {
