@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 
 interface IProduct {
+  _id: Schema.Types.ObjectId;
   name: String;
   description: string;
   price: number;
@@ -11,6 +12,7 @@ interface IProduct {
   discount: number;
   category: Schema.Types.ObjectId;
 }
+
 const productSchema = new Schema<IProduct>(
   {
     name: {

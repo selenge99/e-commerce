@@ -2,14 +2,14 @@ import { Button } from "@/components/ui/button";
 
 const ProductDetail = () => {
   return (
-    <div className="max-w-[1040px] h-[521px] flex justify-between mt-[52px]">
+    <div className="max-w-[1040px] h-[521px] flex justify-between mt-[52px] p-10 mb-10">
       <div className="w-[67px] h-[39xpx] flex flex-col gap-2">
         <img src="./images/product1.png" alt="pro1" />
         <img src="./images/product2.png" alt="pro2" />
         <img src="./images/product3.png" alt="pro3" />
         <img src="./images/product4.png" alt="pro4" />
       </div>
-      <div className="w-[422px] h-[521px]">
+      <div className="">
         <img
           src="./images/product.png"
           alt=""
@@ -37,7 +37,13 @@ const ProductDetail = () => {
           <Button className="rounded-full size-8">+</Button>
         </div>
         <p>120000</p>
-        <button>Сагсанд нэмэх</button>
+        <Button className="bg-[#2563EB] rounded-full w-[175px]">
+          Сагсанд нэмэх
+        </Button>
+      </div>
+      <div className="">
+        <p>Үнэлгээ</p>
+        <p>бүгдийг харах</p>
       </div>
     </div>
   );
