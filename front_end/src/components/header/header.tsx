@@ -11,8 +11,12 @@ const Header = () => {
     <div className="max-w-[1440px] bg-black h-16 text-white flex justify-between px-8 py-4">
       <div className="flex gap-8">
         <img src="./images/Vector.png" alt="" color="white" />
-        <h1>ECOMMERCE</h1>
-        <p>Ангилал</p>
+        <Link href={"/"}>
+          <h1>ECOMMERCE</h1>
+        </Link>
+        <Link href={"/category"}>
+          <p>Ангилал</p>
+        </Link>
       </div>
       <div className="flex items-center border rounded-full p-2">
         <CiSearch />

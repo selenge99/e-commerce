@@ -10,6 +10,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Home() {
+  // const router = useRouter();
   const [products, setProducts] = useState<IProduct[]>([]);
 
   const getAllProducts = async () => {
@@ -20,9 +21,11 @@ export default function Home() {
   useEffect(() => {
     getAllProducts();
   }, []);
-
+  // const handleCard = () => {
+  //   router.push("/product-details");
+  // };
   return (
-    <div className=" max-w-[1440px] h-[2500px] items-center mb-100">
+    <div className=" max-w-[1440px] h-full items-center mb-200">
       <div
         className="h-96 bg-cover"
         style={{ backgroundImage: `url('/images/home.png')` }}
@@ -31,8 +34,7 @@ export default function Home() {
         <p>120000</p>
       </div>
 
-      <div className="max-w-[1040px] grid grid-cols-4 gap-5 m-auto  ">
-        {/* <Example /> */}
+      <div className="max-w-[1040px] grid grid-cols-4 gap-5 m-auto">
         {products.map((p, i) => {
           if (i == 6 || i === 7) {
             return <ProductCardBig key={p._id} product={p} />;
