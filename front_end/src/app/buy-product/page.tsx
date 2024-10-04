@@ -1,7 +1,13 @@
+"use client";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 const BuyProduct = () => {
+  const router = useRouter();
+  const handleChange = () => {
+    router.push("/address");
+  };
   return (
     <div className="max-w-[1440px] h-[500px] ">
       <div className="w-[256px] m-auto">
@@ -36,7 +42,10 @@ const BuyProduct = () => {
             <FaRegTrashAlt size={40} />
           </div>
         </div>
-        <Button className="bg-[#2563EB] rounded-full items-end mt-10">
+        <Button
+          className="bg-[#2563EB] rounded-full items-end mt-10"
+          onClick={handleChange}
+        >
           Худалдан авах
         </Button>
       </div>
