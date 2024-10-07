@@ -18,7 +18,7 @@ const PORT: string = process.env.PORT || "";
 const MONGO_URI = process.env.MONGO_URI || "";
 
 const app = express();
-const resend = new Resend(process.env.RESEND_API_KEYS);
+// const resend = new Resend(process.env.RESEND_API_KEYS);
 app.use(express.json());
 app.use(cors());
 app.use("/api/v1/auth", authRoute);
