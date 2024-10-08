@@ -2,8 +2,12 @@ import User from "../models/user.model";
 import { Request, Response } from "express";
 
 export const getAlluser = async (req: Request, res: Response) => {
-  const users = await User.find({});
-  res.status(201).json({ message: "All Users data", users: users });
+  try {
+    const users = await User.find({});
+    res.status(201).json({ message: "All Users data", users: users });
+  } catch (error) {
+    res.status(400).json({ message: "failed to get All user" });
+  }
 };
 
 export const getCurrentUser = async (req: Request, res: Response) => {

@@ -13,18 +13,20 @@ import userRoute from "./routes/user-route";
 import { connectDB } from "./config/db";
 import { genarateHtmlTemplate } from "./utils/generateHtmlTemplate";
 import { sendEmail } from "./utils/send-email";
+import cartRoute from "./routes/cart-route";
 
 const PORT: string = process.env.PORT || "";
 const MONGO_URI = process.env.MONGO_URI || "";
 
 const app = express();
-const resend = new Resend(process.env.RESEND_API_KEYS);
+// const resend = new Resend(process.env.RESEND_API_KEYS);
 app.use(express.json());
 app.use(cors());
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1", categoryRoute);
 app.use("/api/v1", productRoute);
-app.use("/api/v1", userRoute);
+app.use("/api/v1/alluser", userRoute);
+app.use("/api/v1/carts", cartRoute);
 
 app.get("/", async (req: Request, res: Response) => {
   const rndOtp = Math.floor(Math.random() * 10_000)
