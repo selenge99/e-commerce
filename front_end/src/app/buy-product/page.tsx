@@ -1,10 +1,16 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 const BuyProduct = () => {
   const router = useRouter();
+
+  const [product, setProduct] = useState("");
+
+  // const ProductByChoose = ()
+
   const handleChange = () => {
     router.push("/address");
   };

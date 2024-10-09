@@ -23,8 +23,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use("/api/v1/auth", authRoute);
-app.use("/api/v1", categoryRoute);
-app.use("/api/v1", productRoute);
+app.use("/api/v1/", categoryRoute);
+app.use("/api/v1/", productRoute);
 app.use("/api/v1/alluser", userRoute);
 app.use("/api/v1/carts", cartRoute);
 
