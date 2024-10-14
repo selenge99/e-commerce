@@ -1,19 +1,31 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { FaRegTrashAlt } from "react-icons/fa";
 
+import { ChosenProductCart } from "@/components/chosen-product/chosenProduct";
+import { apiUrl } from "@/utils/util";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+export interface ICart {
+  _id: string;
+  user: string;
+  price: number;
+  name: string;
+  image: [];
+  totalAmount: number;
+}
 const BuyProduct = () => {
-  const router = useRouter();
+  const [chosenProduct, setChosenProduct] = useState<ICart[]>([]);
 
-  const [product, setProduct] = useState("");
-
-  // const ProductByChoose = ()
-
-  const handleChange = () => {
-    router.push("/address");
+  const ProductByChosen = async () => {
+    const response = await axios.get(`${apiUrl}/api/v1/carts/getCarts`);
+    setChosenProduct(response.data.findCarts);
+    console.log("data", response.data);
   };
+
+  useEffect(() => {
+    ProductByChosen();
+  }, []);
+  console.log("===>", chosenProduct);
   return (
     <div className="max-w-[1440px] h-[500px] ">
       <div className="w-[256px] m-auto">
@@ -22,38 +34,11 @@ const BuyProduct = () => {
           <li className="step "></li>
           <li className="step "></li>
         </ul>
-      </div>
-      <div className="max-w-[638px]  m-auto p-5">
-        <p className="mb-5">1.Сагс (4)</p>
-        <div className=" w-[574px] flex justify-between border  p-4 rounded-md">
-          <div className="flex">
-            <img
-              src="/images/pro1.png"
-              alt=""
-              className="h-[100px] rounded-sm"
-            />
-          </div>
-
-          <div className="">
-            <p>Chunky Glyph Tee</p>
-            <div className="flex gap-3">
-              <Button className="rounded-full">+</Button>
-              <p>1</p>
-              <Button className="rounded-full">-</Button>
-            </div>
-            <p>120000</p>
-          </div>
-
-          <div>
-            <FaRegTrashAlt size={40} />
-          </div>
-        </div>
-        <Button
-          className="bg-[#2563EB] rounded-full items-end mt-10"
-          onClick={handleChange}
-        >
-          Худалдан авах
-        </Button>
+        {chosenProduct.map((c, i) => {
+          if (i == 0) {
+            return <ChosenProductCart key={c._id} cart={c} />;
+          }
+        })}
       </div>
     </div>
   );
