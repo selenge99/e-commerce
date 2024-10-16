@@ -1,12 +1,25 @@
 export interface IProduct {
   _id: string;
   name: string;
-  description: string;
+  description?: string;
   price: number;
-  size: string;
+  size?: string;
   images: [string];
-  isNew: boolean;
-  quantity: number;
+  isNew?: boolean;
+  quantity?: number;
   discount: number;
-  category: object;
+  category?: Category;
 }
+
+export type Category = {
+  _id: string;
+  name: string;
+  description?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+
+export type Cart = {
+  product: IProduct;
+  quantity: number;
+};

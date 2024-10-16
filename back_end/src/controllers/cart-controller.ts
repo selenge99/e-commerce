@@ -36,14 +36,35 @@ export const createCart = async (req: Request, res: Response) => {
   }
 };
 
-export const getCarts = async (req: Request, res: Response) => {
-  // const { userId, productId, quantity } = req.body;
+export const getCart = async (req: Request, res: Response) => {
+  const { id } = req.user;
   try {
-    const findCarts = await Cart.find({});
-    res.status(200).json({ message: "Get all carts", findCarts });
+    const cart = await Cart.findOne({ user: id }).populate("products.product");
+    res.status(200).json({ message: "Get cart", cart });
   } catch (error) {
     res.status(400).json({ message: "failed" });
   }
 };
-//  ()=>{}
-//  function (){}
+
+export const updateCart = async (req: Request, res: Response) => {
+  const { id } = req.user;
+  const { productId, newQuantity } = req.body;
+  try {
+    const cart = await Cart.findOne({ user: id });
+    if (!cart) {
+      return res.status(400).json({ message: "user not found" });
+    }
+
+    const findProduct = cart.products.findIndex(
+      (item) => item.product.toString() === productId
+    );
+
+    cart.products[findProduct].quantity = newQuantity;
+
+    const updatedCart = await cart.save();
+    res.status(200).json({ message: "updated cart", updatedCart });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ message: "failed to get carts" });
+  }
+};
