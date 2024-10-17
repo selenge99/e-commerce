@@ -5,12 +5,15 @@ import {
   forgetPassword,
   verifyOtp,
   verifyPassword,
+  getCurrentUser,
+  getAlluser,
 } from "../controllers/auth-controller";
-import { getCurrentUser } from "../controllers/user-controller";
+
 import { auth } from "../middlewares/auth";
 
 const router = Router();
 router.route("/current-user").get(auth, getCurrentUser);
+router.route("/alluser").get(auth, getAlluser);
 router.route("/verify-password").post(verifyPassword);
 router.route("/forget-password").post(forgetPassword);
 router.route("/verify-otp").post(verifyOtp);

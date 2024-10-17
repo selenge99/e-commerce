@@ -9,7 +9,6 @@ dotenv.config();
 import authRoute from "./routes/auth-route";
 import categoryRoute from "./routes/category-route";
 import productRoute from "./routes/product-route";
-import userRoute from "./routes/user-route";
 import { connectDB } from "./config/db";
 import { genarateHtmlTemplate } from "./utils/generateHtmlTemplate";
 import { sendEmail } from "./utils/send-email";
@@ -25,7 +24,6 @@ app.use(cors());
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/", categoryRoute);
 app.use("/api/v1/", productRoute);
-app.use("/api/v1/alluser", userRoute);
 app.use("/api/v1/carts", cartRoute);
 
 app.get("/", async (req: Request, res: Response) => {

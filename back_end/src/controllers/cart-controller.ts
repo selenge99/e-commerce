@@ -49,6 +49,7 @@ export const getCart = async (req: Request, res: Response) => {
 export const updateCart = async (req: Request, res: Response) => {
   const { id } = req.user;
   const { productId, newQuantity } = req.body;
+
   try {
     const cart = await Cart.findOne({ user: id });
     if (!cart) {

@@ -7,6 +7,7 @@ import {
 import { IProduct } from "@/utils/interfaces";
 import { apiUrl } from "@/utils/util";
 import axios from "axios";
+import { LogOut, User } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -41,6 +42,9 @@ export default function Home() {
           }
           return <ProductCard key={p._id} product={p} />;
         })}
+
+        <LogOut />
+        <User size={24} />
       </div>
     </div>
   );

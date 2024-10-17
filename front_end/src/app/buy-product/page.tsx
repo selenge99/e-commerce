@@ -8,7 +8,6 @@ import { headers } from "next/headers";
 import { useEffect, useState } from "react";
 
 const BuyProduct = () => {
-
   const [cartData, setCartData] = useState<Cart>({
     product: { _id: "", name: "", price: 0, images: [""], discount: 0 },
     quantity: 0,
@@ -30,7 +29,7 @@ const BuyProduct = () => {
     }
   };
 
-  console.log("===>", cartData);
+  console.log("=>", cartData);
 
   const updateQuantity = async (productId: string, newQuantity: number) => {
     setCartData((prevCart) =>
@@ -71,12 +70,6 @@ const BuyProduct = () => {
           <li className="step "></li>
           <li className="step "></li>
         </ul>
-       {cartData.map((cartProduct)=>{
-        return(
-          
-        )
-
-       })}
       </div>
     </div>
   );

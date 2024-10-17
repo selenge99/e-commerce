@@ -8,7 +8,7 @@ import {
 import { auth } from "../middlewares/auth";
 
 const router = Router();
-router.route("/").post(createCart);
+router.route("/create-cart").post(createCart);
 router.route("/get-cart").get(auth, getCart);
 router.route("/update-cart").put(auth, updateCart);
 

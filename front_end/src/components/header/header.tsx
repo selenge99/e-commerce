@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -5,10 +7,21 @@ import { CiSearch } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { FiShoppingCart } from "react-icons/fi";
 import { Input } from "../ui/input";
+import { useUser } from "../provider/user-provider";
+import { useRouter } from "next/navigation";
+import { LogOut, User } from "lucide-react";
 
 const Header = () => {
+  const { user, setUser } = useUser();
+  const router = useRouter();
+  const logOut = () => {
+    localStorage.removeItem("token");
+    router.push("/login");
+    setUser(null);
+  };
+  console.log("user", user);
   return (
-    <div className="max-w-[1440px] bg-black h-16 text-white flex justify-between px-8 py-4">
+    <div className=" bg-black h-16 text-white flex justify-between px-8 py-4">
       <div className="flex gap-8">
         <img src="./images/Vector.png" alt="" color="white" />
         <Link href={"/"}>
@@ -25,15 +38,27 @@ const Header = () => {
       <div className="flex gap-8 items-center">
         <CiHeart size={24} />
         <FiShoppingCart size={24} />
-        <Button
-          // variant={"outline"}
-          className="w-[101px] px-8 py-2 rounded-full border-[#2563EB] border-[1px]"
-        >
-          <Link href="/signup">Бүртгүүлэх</Link>
-        </Button>
-        <Button className="bg-blue-700 rounded-full w-[82px] px-3 py-2">
-          <Link href="/login">Нэвтрэх</Link>
-        </Button>
+        {user && (
+          <>
+            <Link href="/userinfo">
+              <User color="white" />
+            </Link>
+            <LogOut color="white" onClick={logOut} />
+          </>
+        )}
+        {!user && (
+          <>
+            <Button
+              // variant={"outline"}
+              className="w-[101px] px-8 py-2 rounded-full border-[#2563EB] border-[1px]"
+            >
+              <Link href="/signup">Бүртгүүлэх</Link>
+            </Button>
+            <Button className="bg-blue-700 rounded-full w-[82px] px-3 py-2">
+              <Link href="/login">Нэвтрэх</Link>
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );
