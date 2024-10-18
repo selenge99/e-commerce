@@ -20,18 +20,18 @@ export const UserContext = createContext<IContext>({
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<IUser | null>(null);
+  const [userToken, setUserToken] = useState("");
+
   const fetchUserData = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(
-        `${apiUrl}/api/v1/alluser/current-user`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (response.status === 200) {
+      setUserToken(token || "");
+      const response = await axios.get(`${apiUrl}/api/v1/auth/current-user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 201) {
         setUser(response.data.user);
       }
     } catch (error) {
@@ -41,7 +41,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     fetchUserData();
-  }, [user]);
+  }, [userToken]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

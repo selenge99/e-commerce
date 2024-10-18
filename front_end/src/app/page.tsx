@@ -42,9 +42,6 @@ export default function Home() {
           }
           return <ProductCard key={p._id} product={p} />;
         })}
-
-        <LogOut />
-        <User size={24} />
       </div>
     </div>
   );

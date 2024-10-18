@@ -40,7 +40,7 @@ export const getCart = async (req: Request, res: Response) => {
   const { id } = req.user;
   try {
     const cart = await Cart.findOne({ user: id }).populate("products.product");
-    res.status(200).json({ message: "Get cart", cart });
+    res.status(200).json({ message: "Get All cart", cart });
   } catch (error) {
     res.status(400).json({ message: "failed" });
   }

@@ -13,7 +13,7 @@ import { auth } from "../middlewares/auth";
 
 const router = Router();
 router.route("/current-user").get(auth, getCurrentUser);
-router.route("/alluser").get(auth, getAlluser);
+router.route("/all-user").get(auth, getAlluser);
 router.route("/verify-password").post(verifyPassword);
 router.route("/forget-password").post(forgetPassword);
 router.route("/verify-otp").post(verifyOtp);

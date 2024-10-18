@@ -4,7 +4,7 @@ import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
 
 export const ProductCard = ({ product }: { product: IProduct }) => {
-  console.log("image", product.images[0]);
+  // console.log("image", product.images[0]);
 
   return (
     <Link href={"/" + product._id}>
